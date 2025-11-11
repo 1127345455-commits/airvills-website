@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Airvills — Contact</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    .contact-page {
+      max-width: 740px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.85));
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(16,24,40,0.08);
+      text-align: left;
+    }
+    .contact-page h1 { color: #002f6c; margin-bottom: 0.25rem; }
+    .contact-page p.lead { color:#334155; margin-bottom:1.25rem; }
+    .form-row { display:flex; gap:1rem; }
+    .form-row .field { flex:1; display:flex; flex-direction:column; margin-bottom:1rem; }
+    label { font-size:0.85rem; color:#0f172a; margin-bottom:0.35rem; }
+    input[type="text"], input[type="email"], textarea {
+      padding:0.75rem 1rem;
+      border-radius:8px;
+      border:1px solid rgba(2,6,23,0.07);
+      font-size:0.95rem;
+      outline:none;
+    }
+    textarea { min-height:120px; resize:vertical; }
+    .actions { display:flex; gap:1rem; align-items:center; margin-top:0.5rem; }
+    .btn-ghost {
+      background:transparent;
+      border:1px solid #cce2ff;
+      color:#002f6c;
+      padding:0.6rem 1rem;
+      border-radius:6px;
+      text-decoration:none;
+    }
+    .notice {
+      margin-top:1rem;
+      padding:0.9rem 1rem;
+      background:#f1f5f9;
+      border-radius:8px;
+      display:none;
+      color:#065f46;
+    }
+    .notice.show { display:block; }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <h1>Airvills</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#listings">Listings</a>
+      <a href="index.html#about">About</a>
+    </nav>
+  </header>
+
+  <main class="contact-page" role="main" aria-labelledby="contact-title">
+    <h1 id="contact-title">Sky Consultation — Book a Mock Appointment</h1>
+    <p class="lead">Fill in your details and one of our Sky Consultants will (pretend to) contact you about available airspace parcels.</p>
+
+    <form id="contactForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="e.g. Sophie Cloud" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@airvills.example" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="interest">I am interested in</label>
+        <select id="interest" name="interest" style="padding:0.7rem 0.9rem; border-radius:8px; border:1px solid rgba(2,6,23,0.07);">
+          <option>Peckham Sky Block — Starter</option>
+          <option>Zone 3 Airspace — Classic</option>
+          <option>Camberwell Sky Block — Classic</option>
+          <option>Just browsing (I like clouds)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Message (optional)</label>
+        <textarea id="message" name="message" placeholder="Tell us why you deserve your own slice of sky..."></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Request Consultation</button>
+        <a href="index.html" class="btn-ghost">Return home</a>
+      </div>
+
+      <div id="notice" class="notice" role="status" aria-live="polite">
+        Thanks — your mock request has been received. A Sky Consultant will pretend to contact you within 3–5 business breaths.
+      </div>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2030 Airvills™ — A little slice of heaven.</p>
+  </footer>
+
+  <script>
+    // Fake submission behaviour (client-side only)
+    const form = document.getElementById('contactForm');
+    const notice = document.getElementById('notice');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // don't actually submit
+      // small animation: disable button, then show notice
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Requesting...';
+      setTimeout(() => {
+        btn.textContent = 'Requested';
+        btn.disabled = false;
+        notice.classList.add('show');
+        // scroll to notice
+        notice.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 900); // 0.9s fake delay
+    });
+  </script>
+</body>
+</html>
